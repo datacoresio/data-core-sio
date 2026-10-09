@@ -1,0 +1,875 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#03070b">
+<meta name="description" content="Data Core — hébergement de serveurs, serveurs de jeux, solutions professionnelles et cybercafé gaming lounge.">
+<title>Data Core — Hébergement &amp; Gaming Cloud</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2303070b'/%3E%3Cpath d='M42 18a18 18 0 1 0 0 28' fill='none' stroke='%233f8cff' stroke-width='7' stroke-linecap='round'/%3E%3Cpath d='M32 18v28M18 24v16' stroke='%23dce9ff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#03070b;--panel:#07111b;--line:#15324a;--blue:#438cff;--cyan:#00d9ff;
+  --text:#f5f8ff;--muted:#96a9bb;--max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.noise{position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+.wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+.nav{height:82px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10}
+.logo {
+  display: flex;
+  align-items: center;
+  width: 181px;
+}
+
+.logo img {
+  display: block;
+  width: 181px;
+  height: auto;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  object-fit: contain;
+}
+.links{display:flex;align-items:center;gap:22px;color:#b7c8d8;font-size:.85rem;font-weight:650}
+.links a:hover{color:#fff}
+.pill{padding:11px 17px;border:1px solid #245683;border-radius:99px;background:#091521}
+.menu{display:none;background:none;border:0;color:#fff;font-size:1.5rem}
+main{position:relative;z-index:1}
+.hero{min-height:calc(100vh - 82px);display:grid;grid-template-columns:1.08fr .92fr;gap:64px;align-items:center;padding:54px 0 80px;position:relative}
+.eyebrow{display:flex;align-items:center;gap:11px;color:var(--cyan);font-size:.78rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase}
+.eyebrow::before{content:"";width:36px;height:2px;background:var(--cyan)}
+h1{font-size:clamp(3rem,7vw,6.8rem);line-height:.89;letter-spacing:-.065em;margin:24px 0 25px;max-width:760px}
+.gradient{color:transparent;background:linear-gradient(100deg,#f7fbff 8%,#64a6ff 60%,#00d9ff);background-clip:text}
+.lead{font-size:clamp(1.05rem,1.7vw,1.3rem);line-height:1.65;color:#adbdca;max-width:650px}
+.actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:35px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 23px;border-radius:6px;font-weight:800;border:none;cursor:pointer;font-size:.95rem}
+.primary{background:linear-gradient(110deg,var(--blue),#1f62ff);box-shadow:0 14px 45px #246bd62d;color:#fff}
+.secondary{border:1px solid var(--line);background:#07111b;color:#ccdae6}
+.visual{height:570px;position:relative;isolation:isolate}
+.server{position:absolute;inset:10px 28px 10px 75px;border:1px solid #0e4664;background:linear-gradient(130deg,#06111a,#010204 65%);box-shadow:0 0 90px #00b7ff17,inset 0 0 80px #0006;border-radius:5px;overflow:hidden;transform:perspective(900px) rotateY(-5deg)}
+.server::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,transparent 0 45px,#0b2434 46px,#0b2434 47px,transparent 48px 58px)}
+
+.rack::before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:#00f6ff;right:16px;top:17px;box-shadow:-20px 0 #438cff,0 15px #065c67,-20px 15px #0ca4b4}
+.rack{
+    position:absolute;
+    left:55px;
+    right:25px;
+    height:60px;
+    border:1px solid #12324a;
+    background:linear-gradient(90deg,#071019,#0b1d2a);
+    z-index:2;
+}
+
+.rack:nth-child(1){top:60px;}
+.rack:nth-child(2){top:158px;}
+.rack:nth-child(3){top:256px;}
+.rack:nth-child(4){top:354px;}
+.rack:nth-child(5){top:452px;}.orb{position:absolute;width:310px;height:310px;border:1px solid #00d9ff50;border-radius:50%;right:-98px;top:78px;box-shadow:0 0 70px #00d9ff15}
+.orb::after,.orb::before{content:"";position:absolute;border:1px solid #438cff38;border-radius:50%;inset:25px}
+.orb::after{inset:72px}
+
+section{padding:100px 0}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:42px}
+.kicker{color:var(--blue);font-size:.8rem;font-weight:850;letter-spacing:.18em;text-transform:uppercase}
+.section-head h2{font-size:clamp(2.15rem,5vw,4rem);line-height:1;margin:12px 0 0;letter-spacing:-.045em}
+.section-head p{max-width:450px;color:var(--muted);line-height:1.6}
+.services{border-top:1px solid #0e2332;background:linear-gradient(180deg,#050b10,#03070b)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.card{min-height:290px;padding:30px 26px;background:linear-gradient(145deg,#09141e,#05090e);border:1px solid #10283a;border-radius:7px;position:relative;transition:.25s}
+.card:hover{transform:translateY(-6px);border-color:#276a9c;box-shadow:0 18px 50px #0009}
+.card.linked{cursor:pointer}
+.icon{width:48px;height:48px;color:#69a3ff;margin-bottom:46px}
+.card small{color:var(--cyan);font-weight:800}
+.card h3{font-size:1.2rem;line-height:1.2;margin:10px 0}
+.card p{color:var(--muted);font-size:.9rem;line-height:1.6}
+.arrow{position:absolute;right:24px;bottom:24px;color:#5e7590}
+.about{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center}
+.quote{border:1px solid var(--line);background:#06111a;padding:45px;border-radius:7px;position:relative}
+.quote::before{content:"“";position:absolute;top:-27px;left:25px;color:#2b7fff;font-size:7rem;font-weight:900;opacity:.45}
+.quote p{font-size:clamp(1.4rem,3vw,2.15rem);line-height:1.25;font-weight:760;margin:20px 0 28px}
+.quote span{color:var(--cyan);font-size:.8rem;letter-spacing:.13em;font-weight:800}
+.about-copy h2{font-size:clamp(2.2rem,5vw,4.3rem);line-height:.98;letter-spacing:-.05em;margin:14px 0 25px}
+.about-copy p{color:var(--muted);line-height:1.7}
+.contact{padding-top:40px}
+.cta{padding:58px;display:flex;justify-content:space-between;align-items:center;gap:25px;background:linear-gradient(110deg,#0a1b2c,#071019);border:1px solid #174b70;border-radius:8px;position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;width:260px;height:260px;border:1px solid #2d81bd;border-radius:50%;right:20px;top:-65px;box-shadow:0 0 70px #00d9ff18}
+.cta h2{font-size:clamp(2rem,4vw,3.7rem);margin:0 0 12px;letter-spacing:-.045em}
+.cta p{margin:0;color:var(--muted)}
+footer{padding:38px 0;color:#718596;font-size:.82rem}
+.foot{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #10212e;padding-top:28px}
+.foot a{color:#a8bdd0}
+
+/* ===== Sections formules (accordéon) ===== */
+.offer{border-top:1px solid #0e2332}
+.offer.alt{background:linear-gradient(180deg,#03070b,#050b10)}
+.offer.base{background:linear-gradient(180deg,#050b10,#03070b)}
+.offer .page-head{padding:0 0 40px}
+.offer .page-head h2{font-size:clamp(2.4rem,6vw,5rem);line-height:.94;letter-spacing:-.05em;margin:20px 0 18px;max-width:820px}
+.hl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:60px}
+.hl{display:flex;align-items:flex-start;gap:14px;padding:20px;background:#07111b;border:1px solid var(--line);border-radius:7px}
+.hl svg{flex-shrink:0;width:30px;height:30px;color:var(--cyan)}
+.hl strong{display:block;font-size:.95rem;margin-bottom:4px}
+.hl span{color:var(--muted);font-size:.85rem;line-height:1.4}
+
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+.plan{position:relative;display:flex;flex-direction:column;background:linear-gradient(145deg,#0b1620,#05090e);border:1px solid #10283a;border-radius:10px;transition:border-color .3s,box-shadow .3s,transform .3s;overflow:hidden}
+.plan:hover{border-color:#2d81bd;box-shadow:0 20px 50px -10px #000a;transform:translateY(-3px)}
+.plan.featured{border-color:var(--cyan);box-shadow:0 0 0 1px #00d9ff45,0 20px 50px -10px #000a}
+.plan.open{border-color:var(--cyan);box-shadow:0 0 0 1px #00d9ff30,0 20px 50px -10px #000a}
+.badge{position:absolute;top:16px;right:16px;background:linear-gradient(110deg,var(--blue),var(--cyan));color:#03070b;font-size:.66rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:6px 13px;border-radius:99px;z-index:2;box-shadow:0 4px 14px #00d9ff33}
+
+.plan-toggle{all:unset;display:block;width:100%;padding:28px 26px 22px;cursor:pointer;position:relative}
+.plan-name{color:var(--cyan);font-size:.75rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;display:block}
+.plan-title-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.plan h3{font-size:1.65rem;margin:0;letter-spacing:-.02em;font-weight:750}
+.chev-wrap{width:34px;height:34px;border-radius:50%;background:#0d1a25;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .25s,border-color .25s,transform .35s}
+.plan-toggle:hover .chev-wrap{border-color:#2d81bd}
+.chev{width:16px;height:16px;color:var(--muted);transition:transform .35s cubic-bezier(.4,0,.2,1),color .25s}
+.plan.open .chev-wrap{background:linear-gradient(110deg,var(--blue),var(--cyan));border-color:transparent}
+.plan.open .chev{transform:rotate(180deg);color:#03070b}
+.plan-hint{margin-top:12px;color:var(--muted);font-size:.8rem;display:flex;align-items:center;gap:6px}
+.plan-hint::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cyan);opacity:.7}
+
+.plan-body{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease;opacity:0}
+.plan.open .plan-body{opacity:1}
+.plan-body-inner{padding:2px 26px 28px}
+.plan-divider{height:1px;background:linear-gradient(90deg,transparent,#1c3140,transparent);margin-bottom:20px}
+.plan-list{list-style:none;margin:0 0 22px;padding:0;display:flex;flex-direction:column;gap:13px}
+.plan-list li{display:flex;align-items:flex-start;gap:10px;color:#ccdae6;font-size:.92rem;line-height:1.45;opacity:0;transform:translateY(4px);transition:opacity .35s ease,transform .35s ease}
+.plan.open .plan-list li{opacity:1;transform:translateY(0)}
+.plan-list li svg{flex-shrink:0;margin-top:2px;width:17px;height:17px;color:var(--cyan);background:#00d9ff14;border-radius:50%;padding:2px;box-sizing:border-box}
+.plan .btn{width:100%}
+.note{margin-top:36px;color:var(--muted);font-size:.85rem;text-align:center}
+
+.gallery{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-top:60px}
+.gallery .g-card{border:1px solid var(--line);background:linear-gradient(145deg,#09141e,#05090e);border-radius:7px;padding:30px;position:relative;overflow:hidden;min-height:200px;display:flex;flex-direction:column;justify-content:flex-end}
+.gallery .g-card::after{content:"";position:absolute;width:220px;height:220px;border:1px solid #2d81bd55;border-radius:50%;right:-70px;top:-70px}
+.gallery h3{margin:0 0 8px;font-size:1.3rem}
+.gallery p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
+
+@media(max-width:1000px){
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .hl-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .links{display:none;position:absolute;top:72px;left:0;right:0;padding:24px;background:#07111bf7;border:1px solid var(--line);flex-direction:column;align-items:flex-start}
+  .links.open{display:flex}
+  .menu{display:block}
+  .hero{grid-template-columns:1fr;padding-top:35px}
+  .visual{height:420px;max-width:620px;width:100%;margin:auto}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .about{grid-template-columns:1fr;gap:36px}
+  .section-head{align-items:start;flex-direction:column}
+  .cta{padding:40px;flex-direction:column;align-items:flex-start}
+}
+@media(max-width:560px){
+  .wrap{width:min(calc(100% - 28px),var(--max))}
+  .logo img{height:38px}
+  .hero{gap:28px}
+  .visual{height:340px}
+  .server{inset:0 8px 0 38px}
+  .grid{grid-template-columns:1fr}
+  .card{min-height:235px}
+  .icon{margin-bottom:28px}
+  .cta{padding:30px 24px}
+  .foot{flex-direction:column}
+  section{padding:76px 0}
+  h1{font-size:3.45rem}
+  .grid4{grid-template-columns:1fr}
+  .hl-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .card{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="noise" aria-hidden="true"></div>
+<header class="wrap">
+  <nav class="nav" aria-label="Navigation principale">
+    <a class="logo" href="#accueil" aria-label="Data Core, accueil">
+      <img src="assets/logo-datacore.svg" alt="Data Core">
+    </a>
+    <button class="menu" aria-expanded="false" aria-controls="nav-links" aria-label="Ouvrir le menu">☰</button>
+    <div class="links" id="nav-links">
+      <a href="#services">Services</a>
+      <a href="#serveurs">Hébergement</a>
+      <a href="#jeux">Serveurs de jeux</a>
+      <a href="#pro">Pro</a>
+      <a href="#cybercafe">Cybercafé</a>
+      <a href="#contact" class="pill">Nous contacter</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="hero wrap" id="accueil">
+    <div>
+      <div class="eyebrow">Hébergement Gaming Cloud</div>
+      <h1>L'infrastructure qui fait <span class="gradient">grandir vos projets.</span></h1>
+      <p class="lead">Des environnements fiables pour héberger, jouer, travailler et partager — accompagnés par une équipe proche de vos besoins.</p>
+      <div class="actions">
+        <a class="btn primary" href="#services">Découvrir nos solutions <span>→</span></a>
+        <a class="btn secondary" href="#contact">Parler à l'équipe</a>
+      </div>
+    </div>
+    <div class="visual" aria-label="Infrastructure serveur Data Core" role="img">
+      <div class="server">
+        <div class="rack"></div><div class="rack"></div><div class="rack"></div><div class="rack"></div><div class="rack"></div>
+      </div>
+      <div class="orb" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="services wrap" id="services">
+    <div class="section-head">
+      <div>
+        <div class="kicker">Nos expertises</div>
+        <h2>Un cœur technique.<br>Quatre solutions.</h2>
+      </div>
+      <p>Du serveur dédié à l'espace gaming, Data Core rassemble les ressources nécessaires pour donner de l'élan à vos projets.</p>
+    </div>
+    <div class="grid">
+      <article class="card linked" onclick="document.getElementById('serveurs').scrollIntoView({behavior:'smooth'})">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="6" width="34" height="10" rx="2"/><rect x="7" y="20" width="34" height="10" rx="2"/><rect x="7" y="34" width="34" height="8" rx="2"/><path d="M12 11h2m-2 14h2m-2 13h2"/></svg>
+        <small>01</small>
+        <h3>Hébergement de serveurs</h3>
+        <p>VPS, dédiés et cloud pour des services rapides, disponibles et évolutifs.</p>
+        <span class="arrow">→</span>
+      </article>
+      <article class="card linked" onclick="document.getElementById('jeux').scrollIntoView({behavior:'smooth'})">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18h18c5 0 9 4 9 9v5c0 5-6 7-9 3l-4-5H19l-4 5c-3 4-9 2-9-3v-5c0-5 4-9 9-9Z"/><path d="M15 24v6m-3-3h6m14-1h.1m5 4h.1"/></svg>
+        <small>02</small>
+        <h3>Serveurs de jeux</h3>
+        <p>Minecraft, FiveM et les grandes plateformes pour créer votre communauté.</p>
+        <span class="arrow">→</span>
+      </article>
+      <article class="card linked" onclick="document.getElementById('pro').scrollIntoView({behavior:'smooth'})">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 37h22a8 8 0 0 0 1-16 13 13 0 0 0-25-2A9 9 0 0 0 14 37Z"/></svg>
+        <small>03</small>
+        <h3>Solutions professionnelles</h3>
+        <p>Infrastructure, accompagnement et services adaptés aux entreprises.</p>
+        <span class="arrow">→</span>
+      </article>
+      <article class="card linked" onclick="document.getElementById('cybercafe').scrollIntoView({behavior:'smooth'})">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="14" r="5"/><circle cx="32" cy="14" r="5"/><path d="M8 35v-5c0-5 4-8 10-8s10 3 10 8v5m-4-10c2-2 5-3 8-3 6 0 9 3 9 8v5"/></svg>
+        <small>04</small>
+        <h3>Cybercafé gaming lounge</h3>
+        <p>Un lieu pour jouer, se rencontrer, organiser et partager.</p>
+        <span class="arrow">→</span>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap about" id="vision">
+    <div class="quote">
+      <p>Des idées aujourd'hui.<br>Un monde plus grand demain.</p>
+      <span>DATA CORE</span>
+    </div>
+    <div class="about-copy">
+      <div class="kicker">Notre vision</div>
+      <h2>La technologie doit rapprocher.</h2>
+      <p>Nous concevons des solutions accessibles, robustes et humaines. Que vous lanciez un serveur, développiez votre activité ou cherchiez un espace pour jouer, nous avançons avec vous.</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION HÉBERGEMENT DE SERVEURS ===== -->
+  <section class="offer base wrap" id="serveurs">
+    <div class="page-head">
+      <div class="eyebrow">Hébergement de serveurs</div>
+      <h2>VPS, dédiés &amp; cloud, <span class="gradient">taillés pour grandir.</span></h2>
+      <p class="lead">Des ressources dimensionnées pour vos sites, applications ou projets — avec un support qui suit votre croissance.</p>
+      <div class="actions">
+        <a class="btn primary" href="#formules-serveurs">Voir les formules <span>→</span></a>
+        <a class="btn secondary" href="#contact">Parler à l'équipe</a>
+      </div>
+    </div>
+
+    <div class="hl-grid">
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="8" width="36" height="10" rx="2"/><rect x="6" y="22" width="36" height="10" rx="2"/><rect x="6" y="36" width="36" height="6" rx="2"/></svg>
+        <div><strong>Infra NVMe</strong><span>Disques NVMe pour des temps de réponse minimes.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 8a16 16 0 1 1-11.3 4.7"/><path d="M24 2v10"/></svg>
+        <div><strong>Évolutif à tout moment</strong><span>Changez de formule sans interruption de service.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 4 8 12v10c0 12 7 18 16 22 9-4 16-10 16-22V12L24 4Z"/></svg>
+        <div><strong>Sécurité incluse</strong><span>Protection anti-DDoS et sauvegardes régulières.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 34v-4c0-6 5-10 16-10s16 4 16 10v4"/><circle cx="24" cy="14" r="7"/></svg>
+        <div><strong>Support dédié</strong><span>Une équipe accessible pour vous accompagner.</span></div>
+      </div>
+    </div>
+
+    <div id="formules-serveurs">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Nos formules</div>
+          <h2>Une puissance adaptée<br>à chaque projet.</h2>
+        </div>
+        <p>Cliquez sur une formule pour afficher le détail des ressources incluses.</p>
+      </div>
+      <div class="grid4" data-accordion>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 01</span>
+            <span class="plan-title-row"><h3>Basic</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>2 vCPU dédiés</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>4 Go de RAM</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>50 Go SSD NVMe</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Bande passante 500 Mbps</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir Basic</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 02</span>
+            <span class="plan-title-row"><h3>Standard</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>4 vCPU dédiés</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>8 Go de RAM</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>120 Go SSD NVMe</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Bande passante 1 Gbps</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir Standard</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan featured" data-plan>
+          <span class="badge">★ Recommandé</span>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 03</span>
+            <span class="plan-title-row"><h3>Premium</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>8 vCPU dédiés dernière génération</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>16 Go de RAM</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>250 Go SSD NVMe</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Bande passante 1 Gbps garantie</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Sauvegardes quotidiennes</li>
+              </ul>
+              <a class="btn primary" href="#contact">Choisir Premium</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 04</span>
+            <span class="plan-title-row"><h3>VIP</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>16 vCPU dédiés haute fréquence</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>32 Go de RAM</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>500 Go SSD NVMe</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Bande passante 2,5 Gbps dédiée</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Protection des données et anti-DDoS renforcé</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Latence très faible garantie</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Assurance en cas de perte de données</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Maintenance et supervision incluses</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir VIP</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <p class="note">Toutes les formules incluent la protection anti-DDoS et l'assistance de notre équipe. Tarifs et modalités sur demande.</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION SERVEURS DE JEUX ===== -->
+  <section class="offer alt wrap" id="jeux">
+    <div class="page-head">
+      <div class="eyebrow">Serveurs de jeux</div>
+      <h2>Minecraft, FiveM <span class="gradient">&amp; plus encore.</span></h2>
+      <p class="lead">Des serveurs de jeux performants et sécurisés pour lancer votre communauté, du petit groupe d'amis à la communauté RP en pleine croissance.</p>
+      <div class="actions">
+        <a class="btn primary" href="#formules-jeux">Voir les formules <span>→</span></a>
+        <a class="btn secondary" href="#contact">Parler à l'équipe</a>
+      </div>
+    </div>
+
+    <div class="hl-grid">
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="14" width="36" height="20" rx="4"/><path d="M16 24h4m-2-2v4m10-2h.1m4 2h.1"/></svg>
+        <div><strong>Panel simplifié</strong><span>Administration via txAdmin ou Pterodactyl.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 4 8 12v10c0 12 7 18 16 22 9-4 16-10 16-22V12L24 4Z"/></svg>
+        <div><strong>Anti-DDoS inclus</strong><span>Votre serveur protégé dès la formule Basic.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 24a16 16 0 1 1 32 0 16 16 0 0 1-32 0Z"/><path d="M24 16v8l6 4"/></svg>
+        <div><strong>Latence minimale</strong><span>Serveurs proches de votre communauté.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18h18c5 0 9 4 9 9v5c0 5-6 7-9 3l-4-5H19l-4 5c-3 4-9 2-9-3v-5c0-5 4-9 9-9Z"/></svg>
+        <div><strong>Multi-jeux</strong><span>Minecraft, FiveM, Rust et grandes plateformes.</span></div>
+      </div>
+    </div>
+
+    <div id="formules-jeux">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Nos formules</div>
+          <h2>Une capacité adaptée<br>à votre communauté.</h2>
+        </div>
+        <p>Cliquez sur une formule pour afficher le détail des ressources incluses.</p>
+      </div>
+      <div class="grid4" data-accordion>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 01</span>
+            <span class="plan-title-row"><h3>Basic</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Jusqu'à 20 joueurs</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>4 Go de RAM allouée</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Minecraft ou FiveM au choix</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Anti-DDoS inclus</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir Basic</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 02</span>
+            <span class="plan-title-row"><h3>Standard</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Jusqu'à 50 joueurs</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>8 Go de RAM allouée</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Multi-jeux (Minecraft, FiveM, Rust...)</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Panel txAdmin / Pterodactyl</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir Standard</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan featured" data-plan>
+          <span class="badge">★ Recommandé</span>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 03</span>
+            <span class="plan-title-row"><h3>Premium</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Jusqu'à 128 joueurs</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>16 Go de RAM allouée</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>CPU dédié dernière génération</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Sauvegardes automatiques quotidiennes</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Support prioritaire</li>
+              </ul>
+              <a class="btn primary" href="#contact">Choisir Premium</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 04</span>
+            <span class="plan-title-row"><h3>VIP</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Slots illimités</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>32 Go de RAM allouée ou plus</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Latence très faible garantie</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Protection anti-DDoS renforcée</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Assurance en cas de perte de données</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Maintenance et mises à jour incluses</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir VIP</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <p class="note">Toutes les formules incluent la protection anti-DDoS et l'assistance de notre équipe. Tarifs et modalités sur demande.</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION SOLUTIONS PROFESSIONNELLES ===== -->
+  <section class="offer base wrap" id="pro">
+    <div class="page-head">
+      <div class="eyebrow">Solutions professionnelles</div>
+      <h2>Une infrastructure <span class="gradient">à la hauteur de votre activité.</span></h2>
+      <p class="lead">Hébergement, accompagnement et continuité de service pour les entreprises et les particuliers qui ne peuvent pas se permettre d'interruption.</p>
+      <div class="actions">
+        <a class="btn primary" href="#formules-pro">Voir les formules <span>→</span></a>
+        <a class="btn secondary" href="#contact">Parler à l'équipe</a>
+      </div>
+    </div>
+
+    <div class="hl-grid">
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 4 8 12v10c0 12 7 18 16 22 9-4 16-10 16-22V12L24 4Z"/></svg>
+        <div><strong>SLA garanti</strong><span>Engagement contractuel de disponibilité.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="8" width="36" height="10" rx="2"/><rect x="6" y="22" width="36" height="10" rx="2"/><rect x="6" y="36" width="36" height="6" rx="2"/></svg>
+        <div><strong>Sauvegardes régulières</strong><span>Rétention et restauration simplifiées.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 34v-4c0-6 5-10 16-10s16 4 16 10v4"/><circle cx="24" cy="14" r="7"/></svg>
+        <div><strong>Accompagnement dédié</strong><span>Une équipe qui connaît votre infrastructure.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 8a16 16 0 1 1-11.3 4.7"/><path d="M24 2v10"/></svg>
+        <div><strong>Conformité RGPD</strong><span>Hébergement et traitement des données en France.</span></div>
+      </div>
+    </div>
+
+    <div id="formules-pro">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Nos formules</div>
+          <h2>Un niveau de service<br>adapté à vos enjeux.</h2>
+        </div>
+        <p>Cliquez sur une formule pour afficher le détail des engagements inclus.</p>
+      </div>
+      <div class="grid4" data-accordion>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 01</span>
+            <span class="plan-title-row"><h3>Basic</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Infrastructure mutualisée sécurisée</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>SLA 99,5% de disponibilité</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Sauvegarde quotidienne</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Support par ticket sous 24h</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir Basic</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 02</span>
+            <span class="plan-title-row"><h3>Standard</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Infrastructure dédiée évolutive</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>SLA 99,9% de disponibilité</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Sauvegardes quotidiennes, rétention 30 jours</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Support prioritaire sous 4h</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir Standard</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan featured" data-plan>
+          <span class="badge">★ Recommandé</span>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 03</span>
+            <span class="plan-title-row"><h3>Premium</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Infrastructure haute disponibilité</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>SLA 99,95% de disponibilité</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Bascule automatique entre zones</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Sauvegardes temps réel (RPO &lt; 1h)</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Accompagnement technique dédié</li>
+              </ul>
+              <a class="btn primary" href="#contact">Choisir Premium</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 04</span>
+            <span class="plan-title-row"><h3>VIP</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Infrastructure sur mesure multi-sites</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>SLA 99,99% garanti contractuellement</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Protection des données et conformité RGPD</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Assurance en cas de perte de données</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Maintenance proactive et astreinte 24/7</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir VIP</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <p class="note">Toutes les formules incluent un accompagnement et un support de notre équipe. Tarifs et modalités sur demande.</p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION CYBERCAFÉ ===== -->
+  <section class="offer alt wrap" id="cybercafe">
+    <div class="page-head">
+      <div class="eyebrow">Cybercafé &amp; Gaming Lounge</div>
+      <h2>Jouez. Rencontrez. <span class="gradient">Partagez.</span></h2>
+      <p class="lead">Un espace pensé pour les gamers et les professionnels : postes performants, confort de jeu et convivialité, au cœur d'un lieu fait pour se retrouver.</p>
+      <div class="actions">
+        <a class="btn primary" href="#formules-cyber">Voir les formules <span>→</span></a>
+        <a class="btn secondary" href="#contact">Parler à l'équipe</a>
+      </div>
+    </div>
+
+    <div class="hl-grid">
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="10" width="36" height="22" rx="2"/><path d="M16 38h16M24 32v6"/></svg>
+        <div><strong>Postes performants</strong><span>Configurations adaptées au gaming et à la bureautique.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 34v-4c0-6 5-10 16-10s16 4 16 10v4"/><circle cx="24" cy="14" r="7"/></svg>
+        <div><strong>Salle réservable</strong><span>Seul ou en groupe, pour vos sessions et événements.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 24a16 16 0 1 1 32 0 16 16 0 0 1-32 0Z"/><path d="M24 16v8l6 4"/></svg>
+        <div><strong>Sans limite de temps</strong><span>Profitez de l'espace au rythme qui vous convient.</span></div>
+      </div>
+      <div class="hl">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 20h32v14a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V20Z"/><path d="M16 20v-4a8 8 0 0 1 16 0v4"/></svg>
+        <div><strong>Salle de repos</strong><span>Un espace pour souffler entre deux sessions.</span></div>
+      </div>
+    </div>
+
+    <div id="formules-cyber">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Nos formules</div>
+          <h2>Un abonnement pour<br>chaque façon de jouer.</h2>
+        </div>
+        <p>Cliquez sur une formule pour afficher le détail des avantages inclus.</p>
+      </div>
+      <div class="grid4" data-accordion>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 01</span>
+            <span class="plan-title-row"><h3>Basic</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Clavier + souris entrée de gamme</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Poste de travail performant</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>3h d'accès par jour</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir Basic</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 02</span>
+            <span class="plan-title-row"><h3>Standard</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Clavier &amp; souris confort</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Poste de travail performant</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>5h d'accès par jour</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir Standard</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan featured" data-plan>
+          <span class="badge">★ Recommandé</span>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 03</span>
+            <span class="plan-title-row"><h3>Premium</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Clavier &amp; souris dernière génération</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Poste de travail dernière génération</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Aucune limite de temps par jour</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Salle réservée seul ou en groupe</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Accès à la salle de repos</li>
+              </ul>
+              <a class="btn primary" href="#contact">Choisir Premium</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="plan" data-plan>
+          <button class="plan-toggle" aria-expanded="false">
+            <span class="plan-name">Formule 04</span>
+            <span class="plan-title-row"><h3>VIP</h3><span class="chev-wrap"><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 9l6 6 6-6"/></svg></span></span>
+            <span class="plan-hint">Voir le détail</span>
+          </button>
+          <div class="plan-body">
+            <div class="plan-body-inner">
+              <div class="plan-divider"></div>
+              <ul class="plan-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Poste ultra haut de gamme, écran 240 Hz</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Casque et périphériques premium dédiés</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Accès illimité, salle privée sur réservation</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Latence très faible sur circuit dédié</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Casier personnel et boissons/snacks inclus</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Assurance matériel en cas de casse ou perte</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12l4 4 10-10"/></svg>Maintenance et nettoyage du poste inclus</li>
+              </ul>
+              <a class="btn secondary" href="#contact">Choisir VIP</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <p class="note">Toutes les formules incluent l'accès au réseau Data Core et à l'assistance de notre équipe. Tarifs et modalités sur demande.</p>
+    </div>
+
+    <div class="gallery">
+      <div class="g-card">
+        <h3>Salle gaming</h3>
+        <p>Postes dernière génération, écrans haute fréquence et connexion très faible latence pour vos sessions compétitives ou entre amis.</p>
+      </div>
+      <div class="g-card">
+        <h3>Salle de repos</h3>
+        <p>Un espace calme pour décompresser, se restaurer et échanger avant de reprendre une session.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact wrap" id="contact">
+    <div class="cta">
+      <div>
+        <h2>Prêt à donner vie<br>à votre projet ?</h2>
+        <p>Échangeons sur la solution adaptée à vos besoins.</p>
+      </div>
+      <a class="btn primary" href="mailto:contact@data-core.fr">contact@data-core.fr <span>↗</span></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span><span id="year"></span> Data Core. Tous droits réservés.</span>
+    <a href="https://data-core.fr">data-core.fr</a>
+    <a href="tel:0699639525">06 99 63 95 25</a>
+    <a href="#accueil">Retour en haut</a>
+  </div>
+</footer>
+
+<script>
+const menu=document.querySelector('.menu'),links=document.querySelector('.links');
+menu.addEventListener('click',()=>{
+  const open=links.classList.toggle('open');
+  menu.setAttribute('aria-expanded',String(open));
+  menu.textContent=open?'✕':'☰';
+});
+document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>{
+  links.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰';
+}));
+document.getElementById('year').textContent=new Date().getFullYear();
+
+document.querySelectorAll('[data-plan]').forEach(plan=>{
+  const toggle=plan.querySelector('.plan-toggle');
+  const body=plan.querySelector('.plan-body');
+  const inner=plan.querySelector('.plan-body-inner');
+  const hint=plan.querySelector('.plan-hint');
+  toggle.addEventListener('click',()=>{
+    const isOpen=plan.classList.contains('open');
+    toggle.setAttribute('aria-expanded',String(!isOpen));
+    plan.classList.toggle('open',!isOpen);
+    if(!isOpen){
+      body.style.maxHeight=inner.scrollHeight+'px';
+      hint.textContent='Masquer le détail';
+    }else{
+      body.style.maxHeight='0px';
+      hint.textContent='Voir le détail';
+    }
+  });
+});
+
+window.addEventListener('resize',()=>{
+  document.querySelectorAll('.plan.open').forEach(plan=>{
+    const body=plan.querySelector('.plan-body');
+    const inner=plan.querySelector('.plan-body-inner');
+    body.style.maxHeight=inner.scrollHeight+'px';
+  });
+});
+</script>
+</body>
+</html>
