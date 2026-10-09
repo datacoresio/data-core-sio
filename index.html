@@ -105,6 +105,20 @@ footer{padding:38px 0;color:#718596;font-size:.82rem}
 .foot{display:flex;justify-content:space-between;gap:20px;border-top:1px solid #10212e;padding-top:28px}
 .foot a{color:#a8bdd0}
 
+
+/* ===== Sections entreprise : statut juridique et contrats ===== */
+.info-section{border-top:1px solid #0e2332;background:linear-gradient(180deg,#050b10,#03070b)}
+.info-intro{max-width:760px;color:var(--muted);line-height:1.7;margin-top:18px}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.info-card{padding:26px;background:linear-gradient(145deg,#09141e,#05090e);border:1px solid var(--line);border-radius:7px}
+.info-card small{color:var(--cyan);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.info-card h3{font-size:1.25rem;margin:12px 0}
+.info-card p,.info-card li{color:var(--muted);font-size:.92rem;line-height:1.65}
+.info-card ul{padding-left:19px;margin-bottom:0}
+.info-note{margin-top:24px;padding:18px 20px;border-left:3px solid var(--cyan);background:#07111b;color:#b7c8d8;line-height:1.65;font-size:.9rem}
+@media(max-width:900px){.info-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.info-grid{grid-template-columns:1fr}}
+
 /* ===== Sections formules (accordéon) ===== */
 .offer{border-top:1px solid #0e2332}
 .offer.alt{background:linear-gradient(180deg,#03070b,#050b10)}
@@ -205,6 +219,8 @@ footer{padding:38px 0;color:#718596;font-size:.82rem}
       <a href="#jeux">Serveurs de jeux</a>
       <a href="#pro">Pro</a>
       <a href="#cybercafe">Cybercafé</a>
+      <a href="#statut">Statut juridique</a>
+      <a href="#contrats">Contrats</a>
       <a href="#contact" class="pill">Nous contacter</a>
     </div>
   </nav>
@@ -810,6 +826,112 @@ footer{padding:38px 0;color:#718596;font-size:.82rem}
         <p>Un espace calme pour décompresser, se restaurer et échanger avant de reprendre une session.</p>
       </div>
     </div>
+  </section>
+
+
+  <!-- ===== STATUT JURIDIQUE ===== -->
+  <section class="info-section wrap" id="statut">
+    <div class="page-head">
+      <div class="eyebrow">Notre entreprise</div>
+      <h2>Un cadre juridique <span class="gradient">adapté à Data Core.</span></h2>
+      <p class="info-intro">Pour un projet comme Data Core, qui combine l’hébergement informatique, les serveurs de jeux, les services aux professionnels et un cybercafé gaming, le statut juridique doit permettre de développer plusieurs activités et de travailler à plusieurs si nécessaire.</p>
+    </div>
+    <div class="info-grid">
+      <article class="info-card">
+        <small>Proposition pour le projet</small>
+        <h3>SAS — Société par actions simplifiée</h3>
+        <p>La SAS peut convenir si Data Core est créé par plusieurs associés. Elle permet d’organiser la répartition du capital et les rôles de chacun dans les statuts.</p>
+        <ul>
+          <li>Responsabilité des associés en principe limitée à leurs apports.</li>
+          <li>Organisation assez souple définie dans les statuts.</li>
+          <li>Adaptée à un projet qui pourrait se développer.</li>
+        </ul>
+      </article>
+      <article class="info-card">
+        <small>Si une seule personne crée l’entreprise</small>
+        <h3>SASU</h3>
+        <p>La SASU est la version de la SAS avec un seul associé. Elle peut être envisagée si une seule personne porte le projet au départ.</p>
+        <ul>
+          <li>Un associé unique.</li>
+          <li>Possibilité d’accueillir d’autres associés en évoluant vers une SAS.</li>
+          <li>Formalités de création et obligations comptables à prévoir.</li>
+        </ul>
+      </article>
+      <article class="info-card">
+        <small>À retenir</small>
+        <h3>Un choix à valider</h3>
+        <p>Pour le site scolaire, nous retenons la SAS comme hypothèse de travail si le projet est porté par plusieurs associés. Le choix définitif dépendra du nombre d’associés, du financement et du fonctionnement réel de l’entreprise.</p>
+        <p>Le statut juridique ne doit pas être présenté comme officiel tant que l’entreprise n’est pas réellement créée.</p>
+      </article>
+    </div>
+    <div class="info-note"><strong>Attention :</strong> cette rubrique présente une proposition pédagogique pour le projet Data Core, et non une confirmation du statut juridique réel de l’entreprise.</div>
+  </section>
+
+  <!-- ===== CONTRATS DE TRAVAIL ===== -->
+  <section class="info-section wrap" id="contrats">
+    <div class="page-head">
+      <div class="eyebrow">Ressources humaines</div>
+      <h2>Les contrats de travail <span class="gradient">chez Data Core.</span></h2>
+      <p class="info-intro">Les contrats sont à choisir selon les besoins de l’activité, la durée du poste et le temps de travail. Voici des exemples cohérents avec les métiers possibles de Data Core.</p>
+    </div>
+    <div class="info-grid">
+      <article class="info-card">
+        <small>Besoin durable</small>
+        <h3>CDI — Contrat à durée indéterminée</h3>
+        <p>Pour un poste permanent, par exemple un technicien systèmes et réseaux, un administrateur de serveurs ou un responsable informatique.</p>
+        <ul>
+          <li>Pas de date de fin prévue au contrat.</li>
+          <li>Contrat adapté à un besoin stable.</li>
+        </ul>
+      </article>
+      <article class="info-card">
+        <small>Besoin temporaire justifié</small>
+        <h3>CDD — Contrat à durée déterminée</h3>
+        <p>Pour une mission temporaire autorisée par la loi, par exemple un remplacement ou un accroissement temporaire d’activité.</p>
+        <ul>
+          <li>Durée et motif précis à indiquer.</li>
+          <li>Ne doit pas servir à pourvoir durablement un poste permanent.</li>
+        </ul>
+      </article>
+      <article class="info-card">
+        <small>Formation et emploi</small>
+        <h3>Contrat d’apprentissage</h3>
+        <p>Pour former un apprenti à un métier tout en travaillant dans l’entreprise, avec une formation en centre de formation d’apprentis.</p>
+        <ul>
+          <li>Alternance entre entreprise et formation.</li>
+          <li>Le poste et les missions doivent correspondre à la formation suivie.</li>
+        </ul>
+      </article>
+      <article class="info-card">
+        <small>Horaires adaptés</small>
+        <h3>CDI ou CDD à temps partiel</h3>
+        <p>Peut convenir à certains horaires d’accueil du cybercafé ou à une activité nécessitant une présence limitée, si les conditions légales sont respectées.</p>
+        <ul>
+          <li>Durée du travail et horaires à préciser.</li>
+          <li>Les règles du temps partiel doivent être respectées.</li>
+        </ul>
+      </article>
+      <article class="info-card">
+        <small>Renfort ponctuel</small>
+        <h3>Intérim</h3>
+        <p>Peut répondre à un besoin temporaire par l’intermédiaire d’une entreprise de travail temporaire, dans les cas prévus par la loi.</p>
+        <ul>
+          <li>Mission temporaire avec motif légal.</li>
+          <li>Contrat géré avec l’agence d’intérim.</li>
+        </ul>
+      </article>
+      <article class="info-card">
+        <small>Exemple d’organisation</small>
+        <h3>Répartition possible</h3>
+        <p>Pour le projet Data Core, on peut imaginer :</p>
+        <ul>
+          <li>Technicien systèmes et réseaux : CDI.</li>
+          <li>Apprenti en informatique : contrat d’apprentissage.</li>
+          <li>Renfort temporaire du cybercafé : CDD si le motif légal est justifié.</li>
+        </ul>
+      </article>
+    </div>
+    <div class="info-note"><strong>À retenir :</strong> le contrat dépend du poste et de la situation réelle. Un CDD ou un contrat d’intérim ne peut pas être utilisé librement pour remplacer un emploi permanent. Les contrats réels doivent respecter le droit du travail en vigueur.</div>
   </section>
 
   <section class="contact wrap" id="contact">
