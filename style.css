@@ -206,14 +206,14 @@ footer{padding:38px 0;color:#718596;font-size:.82rem}
 
 .mentions-legales h1 {
     text-align: center;
-    color: #7692ff;
+    color: #f5f8ff;
     font-size: 3rem;
     margin-bottom: 50px;
 }
 
 .mentions-legales .card {
     background-color: rgba(27, 44, 193, 0.08);
-    border: 1px solid #1b2cc1;
+    border: 1px solid #15324a;
     border-radius: 15px;
     padding: 25px;
     margin-bottom: 25px;
@@ -222,14 +222,14 @@ footer{padding:38px 0;color:#718596;font-size:.82rem}
 
 .mentions-legales .card:hover {
     transform: translateY(-5px);
-    border-color: #7692ff;
+    border-color: #f5f8ff;
     box-shadow: 0 0 20px rgba(118, 146, 255, 0.3);
 }
 
 .mentions-legales h2 {
-    color: #7692ff;
+    color: #f5f8ff;
     margin-bottom: 15px;
-    border-bottom: 2px solid #1b2cc1;
+    border-bottom: 2px solid #15324a;
     padding-bottom: 10px;
 }
 
@@ -239,7 +239,7 @@ footer{padding:38px 0;color:#718596;font-size:.82rem}
 }
 
 .mentions-legales strong {
-    color: #7692ff;
+    color: #f5f8ff;
 }
 
 .mentions-legales ul {
